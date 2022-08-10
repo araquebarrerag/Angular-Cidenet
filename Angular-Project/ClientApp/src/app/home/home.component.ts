@@ -14,6 +14,7 @@ export class HomeComponent {
     public pageActual: number = 1;
     public total: number;
     public load = false;
+    public url = window.location.port;
 
     homeForm = new FormGroup({
         FilterTests: new FormControl('')
@@ -36,6 +37,7 @@ export class HomeComponent {
         this.cargarEmpleados();
         this.cargarForm();
         this.material();
+        console.log(this.url);
     }
 
     public cargarEmpleados() {
