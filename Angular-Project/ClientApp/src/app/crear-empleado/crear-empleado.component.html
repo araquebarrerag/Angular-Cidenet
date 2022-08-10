@@ -1,0 +1,116 @@
+<form [formGroup]="empleadoForm">
+    <div class="col s12 card no-margin color-background margin-top hoverable min-size">
+        <div class="col s12 header center margin-top">
+            <h4>
+                Crear Empleado
+            </h4>
+        </div>
+        <div class="col s12 no-margin" style="margin-top: -850px">
+            <div class="col s12 item">
+                <div class="col m4 s12 no-margin question color-principal size-one">
+                    Primer Nombre
+                </div>
+                <div class="input-field col s12 m8">
+                    <input type="text" class="validate" formControlName="primer_nombre" required pattern="[A-Z]{1,100}">
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Segundo Nombre
+                </div>
+                <div class="input-field col s12 m8">
+                    <input type="text" class="validate" formControlName="segundo_nombre" pattern="[A-Z]{0,100}">
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Primer Apellido
+                </div>
+                <div class="input-field col s12 m8">
+                    <input type="text" class="validate" formControlName="primer_apellido" required pattern="[A-Z]{1,100}">
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Segundo Apellido
+                </div>
+                <div class="input-field col s12 m8">
+                    <input type="text" class="validate" formControlName="segundo_apellido" required pattern="[A-Z]{1,100}">
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Pais
+                </div>
+                <div class="input-field col s12 m8">
+                    <select class="browser-default tooltipped"
+                            data-position="right"
+                            data-tooltip="Seleccione el tipo"
+                            formControlName = "pais">
+                        <option value="0">Seleccione ...</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Estados Unidos">Estados Unidos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Tipo de Identificacion
+                </div>
+                <div class="input-field col s12 m8">
+                    <select class="browser-default tooltipped"
+                            data-position="right"
+                            data-tooltip="Seleccione el tipo"
+                            formControlName="ti">
+                        <option value="0">Seleccione ...</option>
+                        <option value="cc">Cedula de Ciudadania</option>
+                        <option value="ce">Cedula de Extranjeria</option>
+                        <option value="pasaporte">Pasaporte</option>
+                        <option value="permiso">Permiso especial</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Numero de identificacion
+                </div>
+                <div class="input-field col s12 m8">
+                    <input type="text" class="validate" formControlName="numero" required pattern="([A-Z]|[a-z]|[0-9]|[-]){1,20}">
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Fecha de Ingreso
+                </div>
+                <div class="input-field col s12 m8">
+                    <input type="date" class="validate" required formControlName="fecha_ingreso">
+                </div>
+            </div>
+            <div class="col s12 no-margin item">
+                <div class="col m4 s12 no-margin padding-top question color-principal size-one">
+                    Area
+                </div>
+                <div class="input-field col s12 m8">
+                    <select class="browser-default tooltipped"
+                            data-position="right"
+                            data-tooltip="Seleccione el tipo"
+                            formControlName="area"
+                            required>
+                        <option value="0">Seleccione ...</option>
+                        <option value="administracion">Administracion</option>
+                        <option value="financiera">Financiera</option>
+                        <option value="operacion">Operacion</option>
+                        <option value="talento humano">Talento Humano</option>
+                        <option value="servicios varios">Servicios Varios</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col s12 margin-top center">
+                <a (click)="guardar()" class="teal darken-2 waves-effect waves-light btn">
+                    Guardar
+                </a>
+            </div>
+        </div>
+    </div>
+</form>

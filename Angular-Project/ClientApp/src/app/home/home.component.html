@@ -1,0 +1,169 @@
+<div *ngIf="!load">
+    <div class="spinner">
+        <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+    </div>
+</div>
+<div *ngIf="load">
+    <h1 class="center">EMPLEADOS</h1>
+    <form [formGroup]="homeForm">
+        <div class="col s12 blue-grey lighten-5">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">search</i>
+                <textarea id="icon-prefix2" formControlName="FilterTests"
+                          class="materialize-textarea"></textarea>
+                <label for="icon-prefix2">Buscar por nombre</label>
+            </div>
+        </div>
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Pais</th>
+                    <th>TI</th>
+                    <th>Identificacion</th>
+                    <th>Email</th>
+                    <th>Accciones</th>
+                </tr>
+            </thead>
+            <tbody title="Empleados">
+                <tr *ngFor="let empleado of empleados
+                    |
+                    paginate:{id:'foo',
+                    itemsPerPage: 10,
+                    currentPage: pageActual,
+                    totalItems: total};">
+                    <td>{{empleado.primerNombre}} {{empleado.segundoNombre}}</td>
+                    <td>{{empleado.primerApellido}} {{empleado.segundoApellido}}</td>
+                    <td>{{empleado.pais}}</td>
+                    <td>{{empleado.tipoId}}</td>
+                    <td>{{empleado.identificacion}}</td>
+                    <td>{{empleado.email}}</td>
+                    <td>
+                        <a title="editar" class="modal-trigger" href="#modal1" (click)="seleccionarEmpleado(empleado)">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <a title="eliminar" target="_blank" (click)="eliminarEmpleado(empleado.id)">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls class="center-align" id="foo" (pageChange)="pageActual=$event">
+        </pagination-controls>
+    </form>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal row" style="width: 75% !important; margin-left:250px">
+    <form [formGroup]="modalForm">
+        <div class=" col s12 center" style="margin-top: 25px">
+            <h4>Edicion de Empleado</h4>
+        </div>
+        <div class="col s12" style="margin-top: 20px">
+            <div class="col s6" style="text-align:center; margin-top:30px">
+                Primer Nombre
+            </div>
+            <div class="input-field col s4" style="margin-right: 20px">
+                <input type="text" class="validate" formControlName="primer_nombre" required pattern="[A-Z]{1,100}" />
+            </div>
+        </div>
+        <div class="col s12" style="margin-top:-20px">
+            <div class="col s6" style="text-align:center; margin-top:30px">
+                Segundo Nombre
+            </div>
+            <div class="input-field col s4" style="margin-right: 20px">
+                <input type="text" class="validate" formControlName="segundo_nombre" required pattern="[A-Z]{1,100}" />
+            </div>
+        </div>
+        <div class="col s12" style="margin-top:-20px">
+            <div class="col s6" style="text-align:center; margin-top:30px">
+                Primer Apellido
+            </div>
+            <div class="input-field col s4" style="margin-right: 20px">
+                <input type="text" class="validate" formControlName="primer_apellido" required pattern="[A-Z]{1,100}" />
+            </div>
+        </div>
+        <div class="col s12" style="margin-top:-20px">
+            <div class="col s6" style="text-align:center; margin-top:30px">
+                Segundo Apellido
+            </div>
+            <div class="input-field col s4" style="margin-right: 20px">
+                <input type="text" class="validate" formControlName="segundo_apellido" required pattern="[A-Z]{1,100}" />
+            </div>
+        </div>
+        <div class="col s12" style="margin-top:-20px">
+            <div class="col s6" style="text-align:center; margin-top:30px">
+                Pais
+            </div>
+            <div class="input-field col s4" style="margin-right: 20px">
+                <select class="browser-default tooltipped"
+                        data-position="right"
+                        data-tooltip="Seleccione el tipo"
+                        formControlName="pais">
+                    <option value="0">Seleccione ...</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                </select>
+            </div>
+        </div>
+        <div class="col s12" style="margin-top:-20px">
+            <div class="col s3" style="text-align:center; margin-top:30px">
+                Tipo de Identificacion
+            </div>
+            <div class="input-field col s3" style="margin-right: 20px">
+                <select class="browser-default tooltipped"
+                        data-position="right"
+                        data-tooltip="Seleccione el tipo"
+                        formControlName="ti">
+                    <option value="0">Seleccione ...</option>
+                    <option value="cc">Cedula de Ciudadania</option>
+                    <option value="ce">Cedula de Extranjeria</option>
+                    <option value="pasaporte">Pasaporte</option>
+                    <option value="permiso">Permiso especial</option>
+                </select>
+            </div>
+            <div class="col s2" style="text-align:center; margin-top:30px">
+                Area
+            </div>
+            <div class="input-field col s3">
+                <select class="browser-default tooltipped"
+                        data-position="right"
+                        data-tooltip="Seleccione el tipo"
+                        formControlName="area"
+                        required>
+                    <option value="0">Seleccione ...</option>
+                    <option value="administracion">Administracion</option>
+                    <option value="financiera">Financiera</option>
+                    <option value="operacion">Operacion</option>
+                    <option value="talento humano">Talento Humano</option>
+                    <option value="servicios varios">Servicios Varios</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+        </div>
+        <div class="col s12" style="margin-top:-20px">
+            <div class="col s6" style="text-align:center; margin-top:30px">
+                Numero de Identificacion
+            </div>
+            <div class="input-field col s4" style="margin-right: 20px">
+                <input type="text" class="validate" formControlName="numero" required pattern="([A-Z]|[a-z]|[0-9]|[-]){1,20}">
+            </div>
+        </div>
+        <div class="col s12" style="margin-top:-20px">
+            <div class="col s6" style="text-align:center; margin-top:30px">
+                Fecha de Ingreso
+            </div>
+            <div class="input-field col s4" style="margin-right: 20px">
+                <input type="date" class="validate" required formControlName="fecha_ingreso">
+            </div>
+        </div>
+        <div class="col s12 margin-top center">
+            <a (click)="actualizar()" class="teal darken-2 waves-effect waves-light btn">
+                Guardar Cambios
+            </a>
+        </div>
+    </form>
+</div>
